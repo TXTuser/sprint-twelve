@@ -96,18 +96,3 @@ jobs:
               run: |
                   docker push ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.DOCKERHUB_REPO }}:${{ steps.get_version.outputs.VERSION }}
                   docker push ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.DOCKERHUB_REPO }}:latest
-
-            - name: Create GitHub Release
-              uses: softprops/action-gh-release@v1
-              with:
-                  tag_name: ${{ steps.get_version.outputs.VERSION }}
-                  name: Release ${{ steps.get_version.outputs.VERSION }}
-                  body: |
-                      ## Docker Image
-                      - `${{ secrets.DOCKERHUB_USERNAME }}/${{ env.DOCKERHUB_REPO }}:${{ steps.get_version.outputs.VERSION }}`
-                      - `${{ secrets.DOCKERHUB_USERNAME }}/${{ env.DOCKERHUB_REPO }}:latest`
-
-                      ## How to use
-                      ```bash
-                      docker pull ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.DOCKERHUB_REPO }}:${{ steps.get_version.outputs.VERSION }}
-                      docker run --rm ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.DOCKERHUB_REPO }}:${{ steps.get_version.outputs.VERSION }}
