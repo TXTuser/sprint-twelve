@@ -14,7 +14,7 @@ on:
 
 env:
     DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-    DOCKERHUB_REPO: parcel-tracker
+    DOCKERHUB_REPO: sprint-twelve
 
 jobs:
     test:
@@ -62,7 +62,7 @@ jobs:
               run: go tool cover -func=coverage.out
 
             - name: Build application
-              run: CGO_ENABLED=0 go build -o parcel_tracker
+              run: CGO_ENABLED=0 go build -o sprint-twelve
 
             - name: Upload test results
               if: always()
@@ -71,7 +71,7 @@ jobs:
                   name: test-results
                   path: |
                       coverage.out
-                      parcel_tracker
+                      sprint-twelve
 
     publish:
         name: Publish to DockerHub
