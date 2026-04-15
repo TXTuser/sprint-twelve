@@ -104,6 +104,11 @@ func main() {
 	}
 	defer db.Close()
 
+	if err := InitDB(db); err != nil {
+		fmt.Println("Ошибка инициализации БД:", err)
+		return
+	}
+
 	store := NewParcelStore(db)
 	service := NewParcelService(store)
 
